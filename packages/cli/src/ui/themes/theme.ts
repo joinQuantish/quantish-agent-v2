@@ -88,9 +88,9 @@ export const lightTheme: ColorsTheme = {
   type: 'light',
   Background: '#FAFAFA',
   Foreground: '',
-  LightBlue: '#89BDCD',
-  AccentBlue: '#3B82F6',
-  AccentPurple: '#8B5CF6',
+  LightBlue: '#FFB380',
+  AccentBlue: '#FF6B00',  // Quantish orange
+  AccentPurple: '#FF8C00',
   AccentCyan: '#06B6D4',
   AccentGreen: '#3CA84B',
   AccentYellow: '#D5A40A',
@@ -100,16 +100,16 @@ export const lightTheme: ColorsTheme = {
   Comment: '#008000',
   Gray: '#97a0b0',
   DarkGray: interpolateColor('#97a0b0', '#FAFAFA', 0.5),
-  GradientColors: ['#4796E4', '#847ACE', '#C3677F'],
+  GradientColors: ['#FF6B00', '#FF8C00', '#FFB380'],  // Quantish orange gradient
 };
 
 export const darkTheme: ColorsTheme = {
   type: 'dark',
   Background: '#1E1E2E',
   Foreground: '',
-  LightBlue: '#ADD8E6',
-  AccentBlue: '#89B4FA',
-  AccentPurple: '#CBA6F7',
+  LightBlue: '#FFB380',
+  AccentBlue: '#FF8C00',  // Quantish orange
+  AccentPurple: '#FFA500',
   AccentCyan: '#89DCEB',
   AccentGreen: '#A6E3A1',
   AccentYellow: '#F9E2AF',
@@ -119,7 +119,7 @@ export const darkTheme: ColorsTheme = {
   Comment: '#6C7086',
   Gray: '#6C7086',
   DarkGray: interpolateColor('#6C7086', '#1E1E2E', 0.5),
-  GradientColors: ['#4796E4', '#847ACE', '#C3677F'],
+  GradientColors: ['#FF6B00', '#FF8C00', '#FFA500'],  // Quantish orange gradient
 };
 
 export const ansiTheme: ColorsTheme = {

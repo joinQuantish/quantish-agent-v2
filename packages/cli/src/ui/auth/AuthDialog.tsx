@@ -189,7 +189,7 @@ export function AuthDialog({
         alignItems="flex-start"
       >
         <Text color={theme.text.primary}>
-          Logging in with Google... Restarting Gemini CLI to continue.
+          Logging in with Google... Restarting Quantish to continue.
         </Text>
       </Box>
     );
@@ -207,11 +207,16 @@ export function AuthDialog({
       <Text color={theme.text.accent}>? </Text>
       <Box flexDirection="column" flexGrow={1}>
         <Text bold color={theme.text.primary}>
-          Get started
+          Welcome to Quantish - AI Trading Agent
         </Text>
         <Box marginTop={1}>
+          <Text color={theme.text.secondary}>
+            Trade on Polymarket, Kalshi & Limitless with AI
+          </Text>
+        </Box>
+        <Box marginTop={1}>
           <Text color={theme.text.primary}>
-            How would you like to authenticate for this project?
+            How would you like to authenticate?
           </Text>
         </Box>
         <Box marginTop={1}>
@@ -234,14 +239,12 @@ export function AuthDialog({
         </Box>
         <Box marginTop={1}>
           <Text color={theme.text.primary}>
-            Terms of Services and Privacy Notice for Gemini CLI
+            Terms of Service: https://quantish.live/terms
           </Text>
         </Box>
         <Box marginTop={1}>
-          <Text color={theme.text.link}>
-            {
-              'https://github.com/google-gemini/gemini-cli/blob/main/docs/tos-privacy.md'
-            }
+          <Text color={theme.text.secondary}>
+            Powered by Gemini. Market data from Quantish Discovery MCP.
           </Text>
         </Box>
       </Box>

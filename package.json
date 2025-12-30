@@ -1,6 +1,7 @@
 {
-  "name": "@google/gemini-cli",
-  "version": "0.24.0-nightly.20251227.37be16243",
+  "name": "@quantish/agent-v2",
+  "version": "2.0.0",
+  "description": "AI-powered trading agent for prediction markets (V2 - Gemini-powered). Trade on Polymarket, Kalshi & Limitless.",
   "engines": {
     "node": ">=20.0.0"
   },
@@ -8,10 +9,9 @@
   "workspaces": [
     "packages/*"
   ],
-  "private": "true",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/google-gemini/gemini-cli.git"
+    "url": "git+https://github.com/joinQuantish/quantish-agent-v2.git"
   },
   "config": {
     "sandboxImageUri": "us-docker.pkg.dev/gemini-code-dev/gemini-cli/sandbox:0.24.0-nightly.20251227.37be16243"
@@ -69,7 +69,7 @@
     }
   },
   "bin": {
-    "gemini": "bundle/gemini.js"
+    "quantish2": "bundle/gemini.js"
   },
   "files": [
     "bundle/",

@@ -86,6 +86,7 @@ const cliConfig = {
   plugins: createWasmPlugins(),
   alias: {
     'is-in-ci': path.resolve(__dirname, 'packages/cli/src/patches/is-in-ci.ts'),
+    'react-devtools-core': path.resolve(__dirname, 'packages/cli/src/patches/react-devtools-core.ts'),
   },
   metafile: true,
 };
