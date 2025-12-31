@@ -1,7 +1,23 @@
 {
   "name": "@quantish/agent-v2",
-  "version": "2.0.0",
+  "version": "2.0.2",
   "description": "AI-powered trading agent for prediction markets (V2 - Gemini-powered). Trade on Polymarket, Kalshi & Limitless.",
+  "license": "PolyForm-Noncommercial-1.0.0",
+  "author": "Quantish <hello@quantish.live>",
+  "homepage": "https://quantish.live",
+  "bugs": {
+    "url": "https://github.com/joinQuantish/quantish-agent-v2/issues"
+  },
+  "keywords": [
+    "quantish",
+    "polymarket",
+    "kalshi",
+    "trading",
+    "prediction-markets",
+    "ai-agent",
+    "gemini",
+    "mcp"
+  ],
   "engines": {
     "node": ">=20.0.0"
   },
