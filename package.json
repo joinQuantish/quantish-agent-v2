@@ -1,6 +1,6 @@
 {
   "name": "@quantish/agent-v2",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "AI-powered trading agent for prediction markets (V2 - Gemini-powered). Trade on Polymarket, Kalshi & Limitless.",
   "license": "PolyForm-Noncommercial-1.0.0",
   "author": "Quantish <hello@quantish.live>",

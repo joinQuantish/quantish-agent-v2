@@ -26,6 +26,8 @@ export enum AuthState {
   Updating = 'updating',
   // Waiting for user to input API key
   AwaitingApiKeyInput = 'awaiting_api_key_input',
+  // Quantish onboarding (wallet setup)
+  QuantishOnboarding = 'quantish_onboarding',
   // Successfully authenticated
   Authenticated = 'authenticated',
 }

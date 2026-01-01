@@ -125,6 +125,7 @@ import { terminalCapabilityManager } from './utils/terminalCapabilityManager.js'
 import { useInputHistoryStore } from './hooks/useInputHistoryStore.js';
 import { enableBracketedPaste } from './utils/bracketedPaste.js';
 import { useBanner } from './hooks/useBanner.js';
+import { isQuantishConfigured } from '../config/quantishConfig.js';
 
 const WARNING_PROMPT_DURATION_MS = 1000;
 const QUEUE_ERROR_DISPLAY_DURATION_MS = 3000;
@@ -450,6 +451,7 @@ export const AppContainer = (props: AppContainerProps) => {
   // Derive auth state variables for backward compatibility with UIStateContext
   const isAuthDialogOpen = authState === AuthState.Updating;
   const isAuthenticating = authState === AuthState.Unauthenticated;
+  const isQuantishOnboardingOpen = authState === AuthState.QuantishOnboarding;
 
   // Session browser and resume functionality
   const isGeminiClientInitialized = config.getGeminiClient()?.isInitialized();
@@ -478,6 +480,15 @@ export const AppContainer = (props: AppContainerProps) => {
     [handleDeleteSessionSync],
   );
 
+  // Helper to transition to authenticated or onboarding state
+  const transitionToAuthenticated = useCallback(() => {
+    if (isQuantishConfigured()) {
+      setAuthState(AuthState.Authenticated);
+    } else {
+      setAuthState(AuthState.QuantishOnboarding);
+    }
+  }, [setAuthState]);
+
   // Create handleAuthSelect wrapper for backward compatibility
   const handleAuthSelect = useCallback(
     async (authType: AuthType | undefined, scope: LoadableSettingScope) => {
@@ -487,7 +498,7 @@ export const AppContainer = (props: AppContainerProps) => {
 
         try {
           await config.refreshAuth(authType);
-          setAuthState(AuthState.Authenticated);
+          transitionToAuthenticated();
         } catch (e) {
           onAuthError(
             `Failed to authenticate: ${e instanceof Error ? e.message : String(e)}`,
@@ -502,15 +513,15 @@ export const AppContainer = (props: AppContainerProps) => {
           await runExitCleanup();
           writeToStdout(`
 ----------------------------------------------------------------
-Logging in with Google... Restarting Gemini CLI to continue.
+Logging in with Google... Restarting Quantish to continue.
 ----------------------------------------------------------------
           `);
           process.exit(RELAUNCH_EXIT_CODE);
         }
       }
-      setAuthState(AuthState.Authenticated);
+      transitionToAuthenticated();
     },
-    [settings, config, setAuthState, onAuthError],
+    [settings, config, transitionToAuthenticated, onAuthError],
   );
 
   const handleApiKeySubmit = useCallback(
@@ -527,14 +538,14 @@ Logging in with Google... Restarting Gemini CLI to continue.
         await saveApiKey(apiKey);
         await reloadApiKey();
         await config.refreshAuth(AuthType.USE_GEMINI);
-        setAuthState(AuthState.Authenticated);
+        transitionToAuthenticated();
       } catch (e) {
         onAuthError(
           `Failed to save API key: ${e instanceof Error ? e.message : String(e)}`,
         );
       }
     },
-    [setAuthState, onAuthError, reloadApiKey, config],
+    [transitionToAuthenticated, onAuthError, reloadApiKey, config],
   );
 
   const handleApiKeyCancel = useCallback(() => {
@@ -1369,6 +1380,7 @@ Logging in with Google... Restarting Gemini CLI to continue.
     isPermissionsDialogOpen ||
     isAuthenticating ||
     isAuthDialogOpen ||
+    isQuantishOnboardingOpen ||
     isEditorDialogOpen ||
     showPrivacyNotice ||
     showIdeRestartPrompt ||
@@ -1437,6 +1449,7 @@ Logging in with Google... Restarting Gemini CLI to continue.
       isConfigInitialized,
       authError,
       isAuthDialogOpen,
+      isQuantishOnboarding: isQuantishOnboardingOpen,
       isAwaitingApiKeyInput: authState === AuthState.AwaitingApiKeyInput,
       apiKeyDefaultValue,
       editorError,
@@ -1528,6 +1541,7 @@ Logging in with Google... Restarting Gemini CLI to continue.
       isConfigInitialized,
       authError,
       isAuthDialogOpen,
+      isQuantishOnboardingOpen,
       editorError,
       isEditorDialogOpen,
       showPrivacyNotice,

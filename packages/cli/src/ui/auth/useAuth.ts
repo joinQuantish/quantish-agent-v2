@@ -15,6 +15,7 @@ import {
 import { getErrorMessage } from '@google/gemini-cli-core';
 import { AuthState } from '../types.js';
 import { validateAuthMethod } from '../../config/auth.js';
+import { isQuantishConfigured } from '../../config/quantishConfig.js';
 
 export function validateAuthMethodWithSettings(
   authType: AuthType,
@@ -123,7 +124,12 @@ export const useAuthCommand = (settings: LoadedSettings, config: Config) => {
 
         debugLogger.log(`Authenticated via "${authType}".`);
         setAuthError(null);
-        setAuthState(AuthState.Authenticated);
+        // Check if Quantish onboarding is needed
+        if (isQuantishConfigured()) {
+          setAuthState(AuthState.Authenticated);
+        } else {
+          setAuthState(AuthState.QuantishOnboarding);
+        }
       } catch (e) {
         onAuthError(`Failed to login. Message: ${getErrorMessage(e)}`);
       }

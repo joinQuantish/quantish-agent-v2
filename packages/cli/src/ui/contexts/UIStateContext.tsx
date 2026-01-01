@@ -51,6 +51,7 @@ export interface UIState {
   isConfigInitialized: boolean;
   authError: string | null;
   isAuthDialogOpen: boolean;
+  isQuantishOnboarding: boolean;
   isAwaitingApiKeyInput: boolean;
   apiKeyDefaultValue?: string;
   editorError: string | null;

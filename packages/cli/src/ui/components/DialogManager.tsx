@@ -15,6 +15,7 @@ import { SettingsDialog } from './SettingsDialog.js';
 import { AuthInProgress } from '../auth/AuthInProgress.js';
 import { AuthDialog } from '../auth/AuthDialog.js';
 import { ApiAuthDialog } from '../auth/ApiAuthDialog.js';
+import { QuantishOnboarding } from '../auth/QuantishOnboarding.js';
 import { EditorSettingsDialog } from './EditorSettingsDialog.js';
 import { PrivacyNotice } from '../privacy/PrivacyNotice.js';
 import { ProQuotaDialog } from './ProQuotaDialog.js';
@@ -24,6 +25,7 @@ import { SessionBrowser } from './SessionBrowser.js';
 import { PermissionsModifyTrustDialog } from './PermissionsModifyTrustDialog.js';
 import { ModelDialog } from './ModelDialog.js';
 import { theme } from '../semantic-colors.js';
+import { AuthState } from '../types.js';
 import { useUIState } from '../contexts/UIStateContext.js';
 import { useUIActions } from '../contexts/UIActionsContext.js';
 import { useConfig } from '../contexts/ConfigContext.js';
@@ -184,6 +186,15 @@ export const DialogManager = ({
           setAuthState={uiActions.setAuthState}
           authError={uiState.authError}
           onAuthError={uiActions.onAuthError}
+        />
+      </Box>
+    );
+  }
+  if (uiState.isQuantishOnboarding) {
+    return (
+      <Box flexDirection="column">
+        <QuantishOnboarding
+          onComplete={() => uiActions.setAuthState(AuthState.Authenticated)}
         />
       </Box>
     );
